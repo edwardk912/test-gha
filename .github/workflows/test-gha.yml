@@ -41,11 +41,14 @@ jobs:
           chmod +x test_dir/test.sh
           echo "TESTOUTPUT=$(test_dir/test.sh)" >> $GITHUB_ENV
         id: testoutput
-        
-  comment:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/github-script@v3
+
+      - name: test env
+        run: |
+          echo "testing test_env:"
+          echo "${{ env.TESTOUTPUT }}"
+          
+      - name: Comment
+        uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
@@ -55,3 +58,17 @@ jobs:
               repo: context.repo.repo,
               body: '${{ env.TESTOUTPUT }}'
             })
+          
+  # comment:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/github-script@v3
+  #       with:
+  #         github-token: ${{secrets.GITHUB_TOKEN}}
+  #         script: |
+  #           github.issues.createComment({
+  #             issue_number: context.issue.number,
+  #             owner: context.repo.owner,
+  #             repo: context.repo.repo,
+  #             body: '${{ env.TESTOUTPUT }}'
+  #           })

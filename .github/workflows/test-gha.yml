@@ -37,6 +37,9 @@ jobs:
 
           chmod +x test_dir/test.sh
           echo "TEST_OUTPUT=$(test_dir/test.sh)" >> $GITHUB_OUTPUT
+          echo "${{ GITHUB_OUTPUT }}"
+          echo "test running script: $(test_dir/test.sh)"
+          
         id: test_output
         
   comment:

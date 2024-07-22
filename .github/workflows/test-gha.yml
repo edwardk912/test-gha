@@ -24,29 +24,29 @@ jobs:
         with:
           repository: edwardk912/test-gha-scripts
           path: './test_dir'
+          
+      - name: Checkout scripts repo
+        uses: actions/checkout@v4
+        with:
+          repository: edwardk912/test-gha-scripts
+          ref: main
+          path: './scripts/main'
+
+      - name: Checkout scripts repo feature
+        uses: actions/checkout@v4
+        with:
+          repository: edwardk912/test-gha-scripts
+          ref: feature
+          path: './scripts/feature'
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          echo ${{ github.base.ref }}
-          echo ${{ github.ref }}
-          echo ${{ github.sha }}
-          echo ${{secrets.GITHUB_TOKEN}}
-
-          #chmod +x $GITHUB_WORKSPACE/test.sh
-          #$GITHUB_WORKSPACE/test.sh
-
           chmod +x test_dir/test.sh
-          echo "TESTOUTPUT=$(test_dir/test.sh)" >> $GITHUB_ENV
-        id: testoutput
+          test_dir/test.sh
+          ls scripts/feature
+          echo "MAIN=ls scripts/main" >> $GITHUB_ENV
 
-      - name: test env
-        run: |
-          echo "testing test_env:"
-          echo "${{ env.TESTOUTPUT }}"
-          
       - name: Comment
         uses: actions/github-script@v3
         with:
@@ -56,7 +56,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ env.TESTOUTPUT }}'
+              body: '${{ env.MAIN }}'
             })
           
   # comment:

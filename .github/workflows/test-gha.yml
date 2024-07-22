@@ -42,7 +42,8 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "LIST=$(echo "FEATURE: "; ls scripts/feature; echo "MAIN: "; ls scripts/main)" >> $GITHUB_ENV
+          echo "LIST=\"$(diff scripts/main scripts/feature)\"" >> $GITHUB_ENV
+          # echo "LIST=$(echo "FEATURE: "; ls scripts/feature; echo "MAIN: "; ls scripts/main)" >> $GITHUB_ENV
 
       - name: Comment
         uses: actions/github-script@v3

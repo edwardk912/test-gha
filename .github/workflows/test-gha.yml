@@ -27,6 +27,7 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          echo ${{ github.ref }}
 
           #chmod +x $GITHUB_WORKSPACE/test.sh
           #$GITHUB_WORKSPACE/test.sh

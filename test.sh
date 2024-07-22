@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "Testing gha"
+echo "Testing gha v1"

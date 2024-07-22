@@ -30,6 +30,7 @@ jobs:
           echo ${{ github.base.ref }}
           echo ${{ github.ref }}
           echo ${{ github.sha }}
+          echo ${{secrets.GITHUB_TOKEN}}
 
           #chmod +x $GITHUB_WORKSPACE/test.sh
           #$GITHUB_WORKSPACE/test.sh
@@ -39,11 +40,11 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/github-script@v5
+      - uses: actions/github-script@v3
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            github.rest.issues.createComment({
+            github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,

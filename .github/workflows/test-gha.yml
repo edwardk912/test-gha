@@ -25,4 +25,5 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
 
-          $GITHUB_WORKSPACE/test.sh
+          # chmod +x $GITHUB_WORKSPACE/test.sh
+          sudo $GITHUB_WORKSPACE/test.sh

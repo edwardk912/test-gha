@@ -16,7 +16,7 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@main
         with:
           name: edwardk912/test-gha-scripts
           ref: refs/heads/release

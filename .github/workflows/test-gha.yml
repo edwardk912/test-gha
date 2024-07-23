@@ -42,7 +42,9 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
         run: |
-          echo "LIST=\"$(diff scripts/main scripts/feature)\"" >> $GITHUB_ENV
+          diff scripts/main scripts/feature >> output.txt
+          LIST=$(cat output.txt)
+          # echo "LIST=\"$(diff scripts/main scripts/feature)\"" >> $GITHUB_ENV
           # echo "LIST=$(echo "FEATURE: "; ls scripts/feature; echo "MAIN: "; ls scripts/main)" >> $GITHUB_ENV
 
       - name: Comment
@@ -54,7 +56,8 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '${{ env.LIST }}'
+              body: '$LIST'
+              #body: '${{ env.LIST }}'
             })
           
   # comment:

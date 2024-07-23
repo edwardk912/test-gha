@@ -43,7 +43,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           # diff scripts/main scripts/feature >> output.txt
-          LIST=$(ls scripts/main)
+          echo "LIST=$(ls scripts/main)" >> GITHUB_ENV
           # echo "LIST=\"$(diff scripts/main scripts/feature)\"" >> $GITHUB_ENV
           # echo "LIST=$(echo "FEATURE: "; ls scripts/feature; echo "MAIN: "; ls scripts/main)" >> $GITHUB_ENV
 
@@ -56,7 +56,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: "$LIST"
+              body: '${{ env.LIST}}'
             })
           
   # comment:
